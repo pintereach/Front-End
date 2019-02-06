@@ -41,21 +41,28 @@ class Register extends Component {
   render() {
     return (
       <div>
-        <RegisterForm
-          handleChanges={this.handleChanges}
-          handleSubmit={this.handleSubmit}
-          username={this.state.username}
-          password={this.state.password}
-        />
-
-        <button onClick={this.toLogin}>Login</button>
+        {!this.props.isRegistered ? (
+          <div>
+            <RegisterForm
+              handleChanges={this.handleChanges}
+              handleSubmit={this.handleSubmit}
+              username={this.state.username}
+              password={this.state.password}
+            />
+            <button onClick={this.toLogin}>Login</button>
+          </div>
+        ) : (
+          this.props.history.push("/login")
+        )}
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    isRegistered: state.isRegistered
+  };
 };
 
 export default connect(

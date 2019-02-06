@@ -7,7 +7,16 @@ import {
   LOGIN_FAILURE,
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
-  REGISTER_FAILURE
+  REGISTER_FAILURE,
+  FETCHING_USER,
+  FETCHING_USER_SUCCESS,
+  FETCHING_USER_FAILURE,
+  FETCHING_USER_ID,
+  FETCHING_USER_ID_SUCCESS,
+  FETCHING_USER_ID_FAILURE,
+  ADDING_ARTICLES_REQUEST,
+  ADDING_ARTICLES_SUCCESS,
+  ADDING_ARTICLES_FAILURE
 } from "../actions";
 
 const initialState = {
@@ -21,7 +30,10 @@ const initialState = {
   addingArticles: false,
   addedArticles: false,
   deletingArticles: false,
-  deletedArticles: false
+  deletedArticles: false,
+  user: {},
+  token: localStorage.getItem("token"),
+  id: localStorage.getItem("id")
 };
 
 const pintereachReducer = (state = initialState, action) => {
@@ -78,6 +90,51 @@ const pintereachReducer = (state = initialState, action) => {
         isRegistered: false,
         isRegistering: false,
         error: action.payload
+      };
+    case FETCHING_USER:
+      return {
+        ...state
+      };
+    case FETCHING_USER_SUCCESS:
+      return {
+        ...state
+      };
+    case FETCHING_USER_FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      };
+    case FETCHING_USER_ID:
+      return {
+        ...state
+      };
+    case FETCHING_USER_ID_SUCCESS:
+      return {
+        ...state,
+        user: action.payload
+      };
+    case FETCHING_USER_ID_FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      };
+    case ADDING_ARTICLES_REQUEST:
+      return {
+        ...state,
+        addingArticles: true
+      };
+    case ADDING_ARTICLES_SUCCESS:
+      return {
+        ...state,
+        articles: action.payload,
+        addedArticles: true,
+        addingArticles: false
+      };
+    case ADDING_ARTICLES_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        addingArticles: false
       };
     default:
       return state;

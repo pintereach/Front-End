@@ -26,12 +26,9 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
-  console.log(localStorage);
-  return {
-    isLoggedIn: state.isLoggedIn,
-    error: state.error
-  };
+  // console.log(state);
+  // console.log(localStorage);
+  return {};
 };
 
 export default withRouter(
