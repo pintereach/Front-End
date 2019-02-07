@@ -26,8 +26,9 @@ class ArticleBoard extends Component {
   render() {
     return (
       <div>
-        <h3>My Articles</h3>
+        <h3>New Article</h3>
         <ArticleForm />
+        <h3>My Articles</h3>
         {this.props.articles ? (
           this.props.articles.map(articles => {
             return <Article articles={articles} />;

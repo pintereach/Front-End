@@ -88,7 +88,7 @@ export const getUsersId = (id, headersObj) => dispatch => {
 export const getUsersArt = (id, headersObj) => dispatch => {
   dispatch({ type: FETCHING_ARTICLES });
   axios
-    .get(`https://pintereach.herokuapp.com/users/${id}/articles`, headersObj)
+    .get(`https://pintereach.herokuapp.com/users/1/articles`, headersObj)
     .then(res => {
       console.log(res);
       dispatch({ type: FETCHING_ARTICLES_SUCCESS, payload: res.data.articles });

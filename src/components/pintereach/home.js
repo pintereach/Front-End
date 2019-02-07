@@ -17,6 +17,7 @@ class Home extends Component {
     return (
       <div className="myboard">
         <h1>My Board</h1>
+        <h3>My Profile</h3>
         <div className="profile-board">
           <Profile />
         </div>
