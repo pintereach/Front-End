@@ -3,12 +3,11 @@ import React, { Component } from "react";
 class Article extends Component {
   render() {
     return (
-      <div>
-        <p>id: </p>
-        <p>category: </p>
-        <img src="" alt="Cover Page" />
-        <p>title: </p>
-        <p>link: </p>
+      <div className="article-card">
+        <img src={this.props.articles.cover_page} alt="Cover Page" />
+        <p>title: {this.props.articles.title} </p>
+        <p>link: {this.props.articles.link} </p>
+        <button>Delete</button>
       </div>
     );
   }

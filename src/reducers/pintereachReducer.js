@@ -16,7 +16,10 @@ import {
   FETCHING_USER_ID_FAILURE,
   ADDING_ARTICLES_REQUEST,
   ADDING_ARTICLES_SUCCESS,
-  ADDING_ARTICLES_FAILURE
+  ADDING_ARTICLES_FAILURE,
+  DELETING_ARTICLES_REQUEST,
+  DELETING_ARTICLES_SUCCESS,
+  DELETING_ARTICLES_FAILURE
 } from "../actions";
 
 const initialState = {
@@ -135,6 +138,24 @@ const pintereachReducer = (state = initialState, action) => {
         ...state,
         error: action.payload,
         addingArticles: false
+      };
+    case DELETING_ARTICLES_REQUEST:
+      return {
+        ...state,
+        deletingArticles: true
+      };
+    case DELETING_ARTICLES_SUCCESS:
+      return {
+        ...state,
+        articles: action.payload,
+        deletedArticles: true,
+        deletingArticles: false
+      };
+    case DELETING_ARTICLES_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        deletingArticles: false
       };
     default:
       return state;

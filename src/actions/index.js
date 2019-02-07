@@ -8,6 +8,10 @@ export const ADDING_ARTICLES_REQUEST = "ADDING_ARTICLES_REQUEST";
 export const ADDING_ARTICLES_SUCCESS = "ADDING_ARTICLES_SUCCESS";
 export const ADDING_ARTICLES_FAILURE = "ADDING_ARTICLES_FAILURE";
 
+export const DELETING_ARTICLES_REQUEST = "DELETING_ARTICLES_REQUEST";
+export const DELETING_ARTICLES_SUCCESS = "DELETING_ARTICLES_SUCCESS";
+export const DELETING_ARTICLES_FAILURE = "DELETING_ARTICLES_FAILURE";
+
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
@@ -85,9 +89,10 @@ export const getUsersArt = (id, headersObj) => dispatch => {
   dispatch({ type: FETCHING_ARTICLES });
   axios
     .get(`https://pintereach.herokuapp.com/users/${id}/articles`, headersObj)
-    .then(res =>
-      dispatch({ type: FETCHING_ARTICLES_SUCCESS, payload: res.data })
-    )
+    .then(res => {
+      console.log(res);
+      dispatch({ type: FETCHING_ARTICLES_SUCCESS, payload: res.data.articles });
+    })
     .catch(err => dispatch({ type: FETCHING_ARTICLES_FAILURE, payload: err }));
 };
 
@@ -128,10 +133,19 @@ export const postUserArt = (token, newPost) => dispatch => {
 //     .catch(err => dispatch({ type: FAILURE, payload: err }));
 // };
 
-// export const deleteUsersArtId = (id, headersObj) => dispatch => {
-//   dispatch({ type: DELETING });
-//   axios
-//     .delete(`https://pintereach.herokuapp.com/users/articles/${id}`, headersObj)
-//     .then(res => dispatch({ type: DELETED, payload: res.data }))
-//     .catch(err => dispatch({ type: FAILURE, payload: err }));
-// };
+export const deleteUsersIdArtId = (
+  userId,
+  articleId,
+  headersObj
+) => dispatch => {
+  dispatch({ type: DELETING_ARTICLES_REQUEST });
+  axios
+    .delete(
+      `https://pintereach.herokuapp.com/users/${userId}/articles/${articleId}`,
+      headersObj
+    )
+    .then(res =>
+      dispatch({ type: DELETING_ARTICLES_SUCCESS, payload: res.data })
+    )
+    .catch(err => dispatch({ type: DELETING_ARTICLES_FAILURE, payload: err }));
+};

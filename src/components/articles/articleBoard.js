@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getUsersArt } from "../../actions";
+import { getUsersArt, deleteUsersIdArtId } from "../../actions";
 import Article from "./article";
 import ArticleForm from "./articleForm";
 
@@ -10,8 +10,6 @@ class ArticleBoard extends Component {
     console.log(this.props.articles);
   }
 
-  componentDidUpdate() {}
-
   userArticles = () => {
     const headersObj = {
       headers: { authorization: this.props.token }
@@ -20,14 +18,23 @@ class ArticleBoard extends Component {
     this.props.getUsersArt(id, headersObj);
   };
 
+  handleDelete = e => {
+    e.preventDefault();
+    this.props.deleteUsersIdArtId();
+  };
+
   render() {
     return (
       <div>
         <h3>My Articles</h3>
         <ArticleForm />
-        {/* {this.props.articles.articles.map(data => {
-          return <Article />;
-        })} */}
+        {this.props.articles ? (
+          this.props.articles.map(articles => {
+            return <Article articles={articles} />;
+          })
+        ) : (
+          <h4>No Articles :/</h4>
+        )}
       </div>
     );
   }
@@ -43,5 +50,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getUsersArt }
+  { getUsersArt, deleteUsersIdArtId }
 )(ArticleBoard);
