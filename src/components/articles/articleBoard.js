@@ -7,7 +7,7 @@ import ArticleForm from "./articleForm";
 class ArticleBoard extends Component {
   componentDidMount() {
     this.userArticles();
-    console.log(this.props.articles);
+    // console.log(this.props.articles);
   }
 
   userArticles = () => {
