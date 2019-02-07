@@ -10,7 +10,7 @@ class Profile extends Component {
     const headersObj = {
       headers: { authorization: this.props.token }
     };
-    const id = this.props.id;
+    const id = this.props.userId;
     this.props.getUsersId(id, headersObj);
     console.log(id, headersObj);
   };
@@ -26,7 +26,7 @@ class Profile extends Component {
           <p>Display Name: {this.props.user.display_name}</p>
           <p>Email: {this.props.user.email}</p>
         </div>
-        <button>Edit</button>
+        <button>Edit Profile</button>
       </div>
     );
   }
@@ -36,7 +36,7 @@ const mapStateToProps = state => {
   return {
     user: state.user,
     token: state.token,
-    id: state.id
+    userId: state.userId
   };
 };
 

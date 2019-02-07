@@ -19,7 +19,10 @@ import {
   ADDING_ARTICLES_FAILURE,
   DELETING_ARTICLES_REQUEST,
   DELETING_ARTICLES_SUCCESS,
-  DELETING_ARTICLES_FAILURE
+  DELETING_ARTICLES_FAILURE,
+  UPDATING_ARTICLES_REQUEST,
+  UPDATING_ARTICLES_SUCCESS,
+  UPDATING_ARTICLES_FAILURE
 } from "../actions";
 
 const initialState = {
@@ -34,9 +37,12 @@ const initialState = {
   addedArticles: false,
   deletingArticles: false,
   deletedArticles: false,
+  updatingArticles: false,
+  updatedArticles: false,
   user: {},
-  token: localStorage.getItem("token"),
-  id: localStorage.getItem("id")
+  token: null,
+  userId: null,
+  users: []
 };
 
 const pintereachReducer = (state = initialState, action) => {
@@ -67,7 +73,9 @@ const pintereachReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: true,
-        isLoggingIn: false
+        isLoggingIn: false,
+        userId: action.userId,
+        token: action.token
       };
     case LOGIN_FAILURE:
       return {
@@ -100,7 +108,8 @@ const pintereachReducer = (state = initialState, action) => {
       };
     case FETCHING_USER_SUCCESS:
       return {
-        ...state
+        ...state,
+        users: action.payload
       };
     case FETCHING_USER_FAILURE:
       return {
@@ -152,6 +161,24 @@ const pintereachReducer = (state = initialState, action) => {
         deletingArticles: false
       };
     case DELETING_ARTICLES_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        deletingArticles: false
+      };
+    case UPDATING_ARTICLES_REQUEST:
+      return {
+        ...state,
+        deletingArticles: true
+      };
+    case UPDATING_ARTICLES_SUCCESS:
+      return {
+        ...state,
+        articles: action.payload,
+        deletedArticles: true,
+        deletingArticles: false
+      };
+    case UPDATING_ARTICLES_FAILURE:
       return {
         ...state,
         error: action.payload,

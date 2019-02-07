@@ -12,6 +12,10 @@ export const DELETING_ARTICLES_REQUEST = "DELETING_ARTICLES_REQUEST";
 export const DELETING_ARTICLES_SUCCESS = "DELETING_ARTICLES_SUCCESS";
 export const DELETING_ARTICLES_FAILURE = "DELETING_ARTICLES_FAILURE";
 
+export const UPDATING_ARTICLES_REQUEST = "UPDATING_ARTICLES_REQUEST";
+export const UPDATING_ARTICLES_SUCCESS = "UPDATING_ARTICLES_SUCCESS";
+export const UPDATING_ARTICLES_FAILURE = "UPDATING_ARTICLES_FAILURE";
+
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
@@ -39,15 +43,6 @@ export const postAuthReg = newUser => dispatch => {
     .post("https://pintereach.herokuapp.com/auth/register", newUser)
     .then(res => {
       dispatch({ type: REGISTER_SUCCESS, payload: res.data });
-      // console.log(res);
-      if (res.data.token) {
-        console.log("got token");
-        localStorage.setItem("token", res.data.token);
-      }
-      if (res.data.id) {
-        console.log("got id");
-        localStorage.setItem("id", res.data.id);
-      }
     })
     .catch(err => {
       dispatch({ type: REGISTER_FAILURE, payload: err });
@@ -60,7 +55,12 @@ export const postAuthLogin = creds => dispatch => {
   axios
     .post("https://pintereach.herokuapp.com/auth/login", creds)
     .then(res => {
-      dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data,
+        userId: res.data.id,
+        token: res.data.token
+      });
     })
     .catch(err => dispatch({ type: LOGIN_FAILURE, payload: err }));
 };
@@ -88,7 +88,7 @@ export const getUsersId = (id, headersObj) => dispatch => {
 export const getUsersArt = (id, headersObj) => dispatch => {
   dispatch({ type: FETCHING_ARTICLES });
   axios
-    .get(`https://pintereach.herokuapp.com/users/1/articles`, headersObj)
+    .get(`https://pintereach.herokuapp.com/users/${id}/articles`, headersObj)
     .then(res => {
       console.log(res);
       dispatch({ type: FETCHING_ARTICLES_SUCCESS, payload: res.data.articles });
@@ -107,6 +107,42 @@ export const postUserArt = (token, newPost) => dispatch => {
       dispatch({ type: ADDING_ARTICLES_FAILURE, payload: err });
       console.log(err.response);
     });
+};
+
+export const deleteUsersIdArtId = (
+  userId,
+  articleId,
+  headersObj
+) => dispatch => {
+  dispatch({ type: DELETING_ARTICLES_REQUEST });
+  axios
+    .delete(
+      `https://pintereach.herokuapp.com/users/${userId}/articles/${articleId}`,
+      headersObj
+    )
+    .then(res =>
+      dispatch({ type: DELETING_ARTICLES_SUCCESS, payload: res.data })
+    )
+    .catch(err => dispatch({ type: DELETING_ARTICLES_FAILURE, payload: err }));
+};
+
+export const updateUsersIdArtId = (
+  userId,
+  articleId,
+  newPost,
+  token
+) => dispatch => {
+  dispatch({ type: UPDATING_ARTICLES_REQUEST });
+  axios
+    .put(
+      `https://pintereach.herokuapp.com/users/${userId}/articles/${articleId}`,
+      newPost,
+      { headers: { Authorization: token } }
+    )
+    .then(res =>
+      dispatch({ type: UPDATING_ARTICLES_SUCCESS, payload: res.data })
+    )
+    .catch(err => dispatch({ type: UPDATING_ARTICLES_FAILURE, payload: err }));
 };
 
 // export const putUsers = (id, headersObj) => dispatch => {
@@ -132,20 +168,3 @@ export const postUserArt = (token, newPost) => dispatch => {
 //     .then(res => dispatch({ type: DELETED, payload: res.data }))
 //     .catch(err => dispatch({ type: FAILURE, payload: err }));
 // };
-
-export const deleteUsersIdArtId = (
-  userId,
-  articleId,
-  headersObj
-) => dispatch => {
-  dispatch({ type: DELETING_ARTICLES_REQUEST });
-  axios
-    .delete(
-      `https://pintereach.herokuapp.com/users/${userId}/articles/${articleId}`,
-      headersObj
-    )
-    .then(res =>
-      dispatch({ type: DELETING_ARTICLES_SUCCESS, payload: res.data })
-    )
-    .catch(err => dispatch({ type: DELETING_ARTICLES_FAILURE, payload: err }));
-};

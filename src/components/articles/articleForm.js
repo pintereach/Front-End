@@ -13,8 +13,6 @@ class ArticleForm extends Component {
     };
   }
 
-  componentDidMount() {}
-
   handleChanges = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -28,8 +26,8 @@ class ArticleForm extends Component {
       link: this.state.link,
       category_ids: this.state.category_ids
     };
-
     this.props.postUserArt(token, newPost);
+    this.props.userArticles();
   };
 
   render() {
@@ -82,7 +80,8 @@ class ArticleForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    token: state.token
+    token: state.token,
+    userId: state.userId
   };
 };
 

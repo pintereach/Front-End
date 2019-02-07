@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import Home from "./components/pintereach/home";
 import Login from "./components/login/login";
 import Register from "./components/register/register";
+import UserArticles from "./components/users/userArticles";
 
 class App extends Component {
   componentDidMount() {
@@ -19,6 +20,7 @@ class App extends Component {
         <Route exact path="/" component={Register} />
         <Route path="/login" component={Login} />
         <Route path="/user" component={Home} />
+        <Route path="/users/:id/articles" component={UserArticles} />
         {/* {!this.props.isLoggedIn ? <Authenticate /> : <Home />} */}
       </div>
     );

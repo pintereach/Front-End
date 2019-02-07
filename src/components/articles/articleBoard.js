@@ -14,7 +14,7 @@ class ArticleBoard extends Component {
     const headersObj = {
       headers: { authorization: this.props.token }
     };
-    const id = this.props.id;
+    const id = this.props.userId;
     this.props.getUsersArt(id, headersObj);
   };
 
@@ -24,14 +24,19 @@ class ArticleBoard extends Component {
   };
 
   render() {
+    {
+      console.log(this.props.articles);
+    }
     return (
       <div>
         <h3>New Article</h3>
-        <ArticleForm />
+        <ArticleForm userArticles={this.userArticles} />
         <h3>My Articles</h3>
         {this.props.articles ? (
           this.props.articles.map(articles => {
-            return <Article articles={articles} />;
+            return (
+              <Article articles={articles} userArticles={this.userArticles} />
+            );
           })
         ) : (
           <h4>No Articles :/</h4>
@@ -45,7 +50,7 @@ const mapStateToProps = state => {
   return {
     articles: state.articles,
     token: state.token,
-    id: state.id
+    userId: state.userId
   };
 };
 
