@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { postAuthReg } from "../../actions";
 import RegisterForm from "./registerform";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 class Register extends Component {
   constructor(props) {
@@ -49,7 +50,7 @@ class Register extends Component {
               username={this.state.username}
               password={this.state.password}
             />
-            <button onClick={this.toLogin}>Login</button>
+            <Button onClick={this.toLogin}>Login</Button>
           </div>
         ) : (
           this.props.history.push("/login")

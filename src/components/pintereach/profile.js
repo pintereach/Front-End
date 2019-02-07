@@ -1,6 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getUsersId } from "../../actions";
+import styled from "styled-components";
+
+const IMG = styled.img`
+  width: 100px;
+  height: 100px;
+`;
+
+const ProfileDiv = styled.div`
+  display: flex;
+  jsutify-content: space-between;
+`;
+
+const Btn = styled.button`
+  height: 30px;
+  wight: 40px;
+`;
 
 class Profile extends Component {
   componentDidMount() {
@@ -17,16 +33,18 @@ class Profile extends Component {
 
   render() {
     return (
-      <div className="profile">
-        <div>
-          <img src={this.props.user.img_url} alt="Profile Pic" />
-        </div>
-        <div>
-          <p>Username: {this.props.user.username}</p>
-          <p>Display Name: {this.props.user.display_name}</p>
-          <p>Email: {this.props.user.email}</p>
-        </div>
-        <button>Edit Profile</button>
+      <div>
+        <ProfileDiv>
+          <div>
+            <IMG src={this.props.user.img_url} alt="Profile Pic" />
+          </div>
+          <div>
+            <p>Username: {this.props.user.username}</p>
+            <p>Display Name: {this.props.user.display_name}</p>
+            <p>Email: {this.props.user.email}</p>
+          </div>
+        </ProfileDiv>
+        <Btn>Edit Profile</Btn>
       </div>
     );
   }
