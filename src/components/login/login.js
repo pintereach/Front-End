@@ -2,6 +2,13 @@ import React, { Component } from "react";
 import { postAuthLogin } from "../../actions";
 import { connect } from "react-redux";
 import LoginForm from "./loginForm";
+import styled from "styled-components";
+
+const LogIn = styled.div`
+  margin: 0 auto;
+  width: 880px;
+  background-color: lightgrey;
+`;
 
 class Login extends Component {
   constructor(props) {
@@ -43,7 +50,7 @@ class Login extends Component {
   render() {
     console.log(localStorage);
     return (
-      <div>
+      <LogIn>
         {!this.props.isLoggedIn ? (
           <LoginForm
             handleChanges={this.handleChanges}
@@ -55,7 +62,7 @@ class Login extends Component {
         ) : (
           this.props.history.push("/user")
         )}
-      </div>
+      </LogIn>
     );
   }
 }
