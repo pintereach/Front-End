@@ -3,6 +3,13 @@ import { connect } from "react-redux";
 import { getUsersArt, deleteUsersIdArtId } from "../../actions";
 import Article from "./article";
 import ArticleForm from "./articleForm";
+import styled from "styled-components";
+
+const NewArticle = styled.div``;
+
+const MyArticles = styled.div`
+  padding-top: 25px;
+`;
 
 class ArticleBoard extends Component {
   componentDidMount() {
@@ -29,18 +36,22 @@ class ArticleBoard extends Component {
     }
     return (
       <div>
-        <h3>New Article</h3>
-        <ArticleForm userArticles={this.userArticles} />
-        <h3>My Articles</h3>
-        {this.props.articles ? (
-          this.props.articles.map(articles => {
-            return (
-              <Article articles={articles} userArticles={this.userArticles} />
-            );
-          })
-        ) : (
-          <h4>No Articles :/</h4>
-        )}
+        <NewArticle>
+          <h3>New Article</h3>
+          <ArticleForm userArticles={this.userArticles} />
+        </NewArticle>
+        <MyArticles>
+          <h3>My Articles</h3>
+          {this.props.articles ? (
+            this.props.articles.map(articles => {
+              return (
+                <Article articles={articles} userArticles={this.userArticles} />
+              );
+            })
+          ) : (
+            <h4>No Articles :/</h4>
+          )}
+        </MyArticles>
       </div>
     );
   }

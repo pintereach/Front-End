@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { postUserArt } from "../../actions";
+import { Button } from "reactstrap";
 
 class ArticleForm extends Component {
   constructor(props) {
@@ -72,7 +73,7 @@ class ArticleForm extends Component {
             placeholder="Category"
           />
         </div>
-        <button onClick={e => this.handleSubmit(e)}>Submit</button>
+        <Button onClick={e => this.handleSubmit(e)}>Submit</Button>
       </form>
     );
   }

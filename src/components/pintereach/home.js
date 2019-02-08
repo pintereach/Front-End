@@ -29,10 +29,13 @@ const Board = styled.div`
 const Top = styled.div`
   display: flex;
   justify-content: space-around;
+  padding-top: 50px;
 `;
 const ProfileDiv = styled.div``;
 const UserDiv = styled.div``;
-const ArticleDiv = styled.div``;
+const ArticleDiv = styled.div`
+  padding-top: 25px;
+`;
 
 class Home extends Component {
   toLogin = () => {

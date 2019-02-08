@@ -92,13 +92,9 @@ class Article extends Component {
             <p>link: {this.props.articles.link} </p>
           </Details>
           <Buttons>
-            <Button color="danger" onClick={this.handleDelete}>
-              Delete
-            </Button>
+            <Button onClick={this.handleDelete}>Delete</Button>
             <div>
-              <Button color="danger" onClick={this.toggle}>
-                Update
-              </Button>
+              <Button onClick={this.toggle}>Update</Button>
               <Modal
                 isOpen={this.state.modal}
                 toggle={this.toggle}

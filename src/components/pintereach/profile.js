@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getUsersId } from "../../actions";
 import styled from "styled-components";
+import { Button } from "reactstrap";
 
 const IMG = styled.img`
   width: 100px;
@@ -44,7 +45,7 @@ class Profile extends Component {
             <p>Email: {this.props.user.email}</p>
           </div>
         </ProfileDiv>
-        <Btn>Edit Profile</Btn>
+        <Button>Edit Profile</Button>
       </div>
     );
   }
