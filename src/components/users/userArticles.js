@@ -2,6 +2,13 @@ import React, { Component } from "react";
 import { getUsersArt } from "../../actions";
 import { connect } from "react-redux";
 import UserArticle from "./userArticle";
+import styled from "styled-components";
+
+const Board = styled.div`
+  width: 880px;
+  margin: 0 auto;
+  background-color: lightgrey;
+`;
 
 class UserArticles extends Component {
   componentDidMount() {
@@ -19,7 +26,7 @@ class UserArticles extends Component {
 
   render() {
     return (
-      <div>
+      <Board>
         {this.props.articles ? (
           this.props.articles.map(articles => {
             return (
@@ -32,7 +39,7 @@ class UserArticles extends Component {
         ) : (
           <h4>No Articles :/</h4>
         )}
-      </div>
+      </Board>
     );
   }
 }

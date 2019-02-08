@@ -3,6 +3,13 @@ import { connect } from "react-redux";
 import { postAuthReg } from "../../actions";
 import RegisterForm from "./registerform";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import styled from "styled-components";
+
+const Reg = styled.div`
+  margin: 0 auto;
+  width: 880px;
+  background-color: lightgrey;
+`;
 
 class Register extends Component {
   constructor(props) {
@@ -41,7 +48,7 @@ class Register extends Component {
 
   render() {
     return (
-      <div>
+      <Reg>
         {!this.props.isRegistered ? (
           <div>
             <RegisterForm
@@ -55,7 +62,7 @@ class Register extends Component {
         ) : (
           this.props.history.push("/login")
         )}
-      </div>
+      </Reg>
     );
   }
 }

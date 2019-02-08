@@ -13,6 +13,17 @@ import {
   Input,
   FormText
 } from "reactstrap";
+import styled from "styled-components";
+
+const ArticleCard = styled.div`
+  width: 100%;
+`;
+const Desc = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+const Details = styled.div``;
+const Buttons = styled.div``;
 
 class Article extends Component {
   constructor(props) {
@@ -73,76 +84,83 @@ class Article extends Component {
 
   render() {
     return (
-      <div className="article-card">
-        <p>{this.props.articles.id}</p>
+      <ArticleCard>
         <img src={this.props.articles.cover_page} alt="Cover Page" />
-        <p>title: {this.props.articles.title} </p>
-        <p>link: {this.props.articles.link} </p>
-        <button onClick={this.handleDelete}>Delete</button>
-        <div>
-          <Button color="danger" onClick={this.toggle}>
-            Update
-          </Button>
-          <Modal
-            isOpen={this.state.modal}
-            toggle={this.toggle}
-            className={this.props.className}
-          >
-            <ModalHeader toggle={this.toggle}>
-              {this.props.articles.id}
-            </ModalHeader>
-            <Form>
-              <FormGroup>
-                <Label>Cover Page</Label>
-                <Input
-                  onChange={this.handleChanges}
-                  type="text"
-                  name="cover_page"
-                  placeholder={this.props.articles.cover_page}
-                  value={this.state.cover_page}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label>Title</Label>
-                <Input
-                  onChange={this.handleChanges}
-                  type="text"
-                  name="title"
-                  placeholder={this.props.articles.title}
-                  value={this.state.title}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label>Link</Label>
-                <Input
-                  onChange={this.handleChanges}
-                  type="text"
-                  name="link"
-                  placeholder={this.props.articles.link}
-                  value={this.state.link}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label>Category Id's</Label>
-                <Input
-                  onChange={this.handleChanges}
-                  type="text"
-                  name="category"
-                  placeholder="Category"
-                />
-              </FormGroup>
-            </Form>
-            <ModalFooter>
-              <Button color="primary" onClick={this.handleUpdate}>
+        <Desc>
+          <Details>
+            <p>title: {this.props.articles.title} </p>
+            <p>link: {this.props.articles.link} </p>
+          </Details>
+          <Buttons>
+            <Button color="danger" onClick={this.handleDelete}>
+              Delete
+            </Button>
+            <div>
+              <Button color="danger" onClick={this.toggle}>
                 Update
-              </Button>{" "}
-              <Button color="secondary" onClick={this.toggle}>
-                Cancel
               </Button>
-            </ModalFooter>
-          </Modal>
-        </div>
-      </div>
+              <Modal
+                isOpen={this.state.modal}
+                toggle={this.toggle}
+                className={this.props.className}
+              >
+                <ModalHeader toggle={this.toggle}>
+                  {this.props.articles.id}
+                </ModalHeader>
+                <Form>
+                  <FormGroup>
+                    <Label>Cover Page</Label>
+                    <Input
+                      onChange={this.handleChanges}
+                      type="text"
+                      name="cover_page"
+                      placeholder={this.props.articles.cover_page}
+                      value={this.state.cover_page}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <Label>Title</Label>
+                    <Input
+                      onChange={this.handleChanges}
+                      type="text"
+                      name="title"
+                      placeholder={this.props.articles.title}
+                      value={this.state.title}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <Label>Link</Label>
+                    <Input
+                      onChange={this.handleChanges}
+                      type="text"
+                      name="link"
+                      placeholder={this.props.articles.link}
+                      value={this.state.link}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <Label>Category Id's</Label>
+                    <Input
+                      onChange={this.handleChanges}
+                      type="text"
+                      name="category"
+                      placeholder="Category"
+                    />
+                  </FormGroup>
+                </Form>
+                <ModalFooter>
+                  <Button color="primary" onClick={this.handleUpdate}>
+                    Update
+                  </Button>{" "}
+                  <Button color="secondary" onClick={this.toggle}>
+                    Cancel
+                  </Button>
+                </ModalFooter>
+              </Modal>
+            </div>
+          </Buttons>
+        </Desc>
+      </ArticleCard>
     );
   }
 }
